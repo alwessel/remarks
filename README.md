@@ -15,6 +15,16 @@ Remarks is designed and developed for Linux. There are no Remarks binaries.
 
 If you don't want to use Nix, you can use [poetry](https://python-poetry.org/) and install the dependencies manually.
 
+## Install as docker image 
+
+You can also use Docker to run Remarks without installing dependencies on your host system.
+
+Use the `remarks-docker.sh` to run remarks within docker. If not existing, the script will build the docker image for you.
+
+```sh
+./remarks-docker.sh [--ssh-sync-before] <input-files> <output-directory>> <remarks-arguments>
+```
+
 ## Functionality
 
 - Convert a ReMarkable notebook to PDF
