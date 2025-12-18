@@ -48,7 +48,10 @@ def run_remarks(
         f'\nFound {num_docs} documents in "{input_dir}", will process them now',
     )
 
-    for metadata_path in input_dir.glob("*.metadata"):
+    # Process most recently modified files first
+    metadata_files = sorted(input_dir.glob("*.metadata"), key=lambda p: p.stat().st_mtime, reverse=True)
+
+    for metadata_path in metadata_files:
         if not is_document(metadata_path):
             continue
 
