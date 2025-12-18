@@ -70,7 +70,12 @@ def run_remarks(
             in_device_dir = get_ui_path(metadata_path)
             relative_doc_path = pathlib.Path(f"{in_device_dir}/{doc_name}")
 
-            process_document(metadata_path, relative_doc_path, output_dir)
+            try:
+                process_document(metadata_path, relative_doc_path, output_dir)
+            except Exception as exc:
+                logging.exception(f'Failed processing document "{doc_name}" ({metadata_path.stem}): {exc}')
+                continue
+
         else:
             logging.info(
                 f'\nFile skipped: "{doc_name}" ({metadata_path.stem}) due to unsupported filetype: {doc_type}. remarks only supports: {", ".join(supported_types)}'
