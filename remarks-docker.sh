@@ -26,7 +26,8 @@ shift 2
 # build image only if it doesn't exist
 DOCKER_IMAGE_NAME=remarks
 if ! docker image inspect "$DOCKER_IMAGE_NAME" > /dev/null 2>&1; then
-  docker build . -f Dockerfile -t "$DOCKER_IMAGE_NAME"
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  docker build "$SCRIPT_DIR" -f "$SCRIPT_DIR/Dockerfile" -t "$DOCKER_IMAGE_NAME"
 fi
 
 #  perform rsync from device using ssh if requested
